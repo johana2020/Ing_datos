@@ -1,0 +1,38 @@
+create table EntidadPublica(
+	Nit int not null,
+	Nombre varchar(30),
+	Departamento varchar(30),
+	primary key (nit)
+);
+
+create table Producto(
+	Codigo int not null,
+	Nombre varchar(30),
+	primary key (Codigo)
+);
+
+create table Proveedor(
+	Num_Doc int,
+	Tipo_Doc varchar (30),
+	Nombre varchar(50),
+	Tipo varchar(15),
+	primary key(Num_Doc)
+);
+
+create table Contrato(
+	ID int,
+	Estado varchar(15),
+	Area varchar(15),
+	Fecha_Firma date,
+	Fecha_Fin date,
+	Dias_Adicionados int,
+	Valor int,
+	Valor_Pagado int,
+	Nit_Entidad_EntidadPublica int,
+	Num_Doc_Proveedor int,
+	Codigo_Producto int,
+	foreign key (Nit_Entidad_EntidadPublica) references EntidadPublica (Nit),
+	foreign key (Num_Doc_Proveedor) references Proveedor (Num_Doc),
+	foreign key (Codigo_Producto) references Producto (Codigo),
+	primary key (ID, Codigo_Producto)
+);
