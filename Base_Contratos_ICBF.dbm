@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="9"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="EntidadPublica" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="180" y="180"/>
+	<column name="Nit" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Nombre">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="Departamento">
+		<type name="varchar" length="30"/>
+	</column>
+	<constraint name="EntidadPublica_pk" type="pk-constr" table="public.&quot;EntidadPublica&quot;">
+		<columns names="Nit" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Proveedor" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1020" y="80"/>
+	<column name="Num_Doc" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Nombre">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="Proveedor_pk" type="pk-constr" table="public.&quot;Proveedor&quot;">
+		<columns names="Num_Doc" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Contrato" layer="0" collapse-mode="2" max-obj-count="15" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="600" y="320"/>
+	<column name="ID" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Fecha_Firma" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Fecha_Fin" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Dias_Adicionados">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Valor">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Valor_Pagado">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="Contrato_pk" type="pk-constr" table="public.&quot;Contrato&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="CodigoEstado_estado" index="8"/>
+		<object name="Codigo_Producto" index="7"/>
+		<object name="Nit_EntidadPublica" index="6"/>
+		<object name="Num_Doc_Proveedor" index="9"/>
+		<object name="codigo area_Area_contrato" index="10"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Area_contrato_fk" index="3"/>
+		<object name="EntidadPublica_fk" index="1"/>
+		<object name="Producto_fk" index="2"/>
+		<object name="Proveedor_fk" index="5"/>
+		<object name="estado_fk" index="4"/>
+	</customidxs>
+</table>
+
+<table name="Producto" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="740" y="780"/>
+	<column name="Codigo" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Nombre">
+		<type name="varchar" length="30"/>
+	</column>
+	<constraint name="Producto_pk" type="pk-constr" table="public.&quot;Producto&quot;">
+		<columns names="Codigo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="EntidadPublica_has_many_Contrato" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e050a7"
+	 src-table="public.&quot;EntidadPublica&quot;"
+	 dst-table="public.&quot;Contrato&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="-10.15" y="35.9096"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="39.0934" y="-63.9323"/>
+	</label>
+</relationship>
+
+<relationship name="Proveedor_has_many_Contrato" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#260773"
+	 src-table="public.&quot;Proveedor&quot;"
+	 dst-table="public.&quot;Contrato&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-25.9066" y="-77.1323"/>
+	</label>
+</relationship>
+
+<relationship name="Producto_has_many_Contrato" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#410b66"
+	 src-table="public.&quot;Producto&quot;"
+	 dst-table="public.&quot;Contrato&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="7.11445" y="-17.15"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="3.09341" y="12.8677"/>
+	</label>
+</relationship>
+
+<table name="TipoProveedor" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1480" y="100"/>
+	<column name="CodTipo" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Tipo_proveedor">
+		<type name="varchar" length="15"/>
+	</column>
+	<constraint name="TipoProveedor_pk" type="pk-constr" table="public.&quot;TipoProveedor&quot;">
+		<columns names="CodTipo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Tipo Documento" layer="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="420"/>
+	<column name="Tipo_Doc" not-null="true">
+		<type name="char" length="3"/>
+	</column>
+	<constraint name="Tipo Documento_pk" type="pk-constr" table="public.&quot;Tipo Documento&quot;">
+		<columns names="Tipo_Doc" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="TipoProveedor_has_many_Proveedor" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a4e409"
+	 src-table="public.&quot;TipoProveedor&quot;"
+	 dst-table="public.&quot;Proveedor&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="Tipo Documento_has_many_Proveedor" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#026b8e"
+	 src-table="public.&quot;Tipo Documento&quot;"
+	 dst-table="public.&quot;Proveedor&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<table name="estado" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="400"/>
+	<column name="CodigoEstado" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Estado_contrato">
+		<type name="varchar" length="15"/>
+	</column>
+	<constraint name="estado_pk" type="pk-constr" table="public.estado">
+		<columns names="CodigoEstado" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Area_contrato" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="180" y="660"/>
+	<column name="codigo area" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="area">
+		<type name="varchar" length="15"/>
+	</column>
+	<constraint name="Area_contrato_pk" type="pk-constr" table="public.&quot;Area_contrato&quot;">
+		<columns names="codigo area" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="Area_contrato_has_many_Contrato" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#8e8895"
+	 src-table="public.&quot;Area_contrato&quot;"
+	 dst-table="public.&quot;Contrato&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+<relationship name="estado_has_many_Contrato" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f025e0"
+	 src-table="public.estado"
+	 dst-table="public.&quot;Contrato&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+/>
+
+</dbmodel>
