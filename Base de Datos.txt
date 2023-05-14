@@ -5,6 +5,12 @@ create table Entidadpublica(
 	primary key (nit)
 );
 
+create table Producto(
+	Codigo int not null,
+	Nombre varchar(30),
+	primary key (Codigo)
+);
+
 create table Estado(
 	Codigo_estado int not null,
 	Estado_contrato varchar(15),
@@ -15,12 +21,6 @@ create table Areacontrato(
 	Codigo_area int not null,
 	Area varchar(15),
 	primary key(Codigo_area)
-);
-
-create table Producto(
-	Codigo int not null,
-	Nombre varchar(30),
-	primary key(Codigo)
 );
 
 create table Tipodocumento(
@@ -35,17 +35,17 @@ create table Tipoproveedor(
 );
 
 create table Proveedor(
-	Num_doc int,
+	Num_doc int not null unique,
 	Nombre varchar(50),
 	Cod_tipo_Tipoproveedor int not null,
-	Tipo_doc_Tipodocumento char(3),
+	Tipo_doc_Tipodocumento char(3) not null,
 	foreign key (Cod_tipo_Tipoproveedor) references Tipoproveedor(Cod_tipo),
 	foreign key (Tipo_doc_Tipodocumento) references Tipodocumento(Tipo_doc),
 	primary key(Num_Doc, Cod_tipo_Tipoproveedor, Tipo_doc_Tipodocumento)
 );
 
 create table Contrato(
-	ID int,
+	ID int not null,
 	Fecha_firma date not null,
 	Fecha_fin date not null,
 	Dias_adicionados int,
@@ -59,7 +59,7 @@ create table Contrato(
 	foreign key (Nit_Entidadpublica) references Entidadpublica (Nit),
 	foreign key (Codigo_Producto) references Producto (Codigo),
 	foreign key (Codigo_estado_Estado) references Estado (Codigo_estado),
-	foreign key (Num_Doc_Proveedor) references Proveedor (Num_Doc),
+	foreign key (Num_Doc_Proveedor) references Proveedor (Num_doc),
 	foreign key (Codigo_area_Areacontrato) references Areacontrato (Codigo_area),
 	primary key (ID, Codigo_Producto, Codigo_estado_Estado, Codigo_area_Areacontrato)
 );
