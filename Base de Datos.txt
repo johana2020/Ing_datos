@@ -5,12 +5,6 @@ create table Entidadpublica(
 	primary key (nit)
 );
 
-create table Producto(
-	Codigo int not null,
-	Nombre varchar(30),
-	primary key (Codigo)
-);
-
 create table Estado(
 	Codigo_estado int not null,
 	Estado_contrato varchar(15),
