@@ -1,4 +1,4 @@
-create table EntidadPublica(
+create table Entidadpublica(
 	Nit int not null,
 	Nombre varchar(30),
 	Departamento varchar(30),
@@ -11,28 +11,61 @@ create table Producto(
 	primary key (Codigo)
 );
 
+create table Estado(
+	Codigo_estado int not null,
+	Estado_contrato varchar(15),
+	primary key(Codigo_estado)
+);
+
+create table Areacontrato(
+	Codigo_area int not null,
+	Area varchar(15),
+	primary key(Codigo_area)
+);
+
+create table Producto(
+	Codigo int not null,
+	Nombre varchar(30),
+	primary key(Codigo)
+);
+
+create table Tipodocumento(
+	Tipo_doc char(3) not null,
+	primary key(Tipo_doc)
+);
+
+create table Tipoproveedor(
+	Cod_tipo int not null,
+	Tipo_proveedor varchar(15),
+	primary key(Cod_tipo)
+);
+
 create table Proveedor(
-	Num_Doc int,
-	Tipo_Doc varchar (30),
+	Num_doc int,
 	Nombre varchar(50),
-	Tipo varchar(15),
-	primary key(Num_Doc)
+	Cod_tipo_Tipoproveedor int not null,
+	Tipo_doc_Tipodocumento char(3),
+	foreign key (Cod_tipo_Tipoproveedor) references Tipoproveedor(Cod_tipo),
+	foreign key (Tipo_doc_Tipodocumento) references Tipodocumento(Tipo_doc),
+	primary key(Num_Doc, Cod_tipo_Tipoproveedor, Tipo_doc_Tipodocumento)
 );
 
 create table Contrato(
 	ID int,
-	Estado varchar(15),
-	Area varchar(15),
-	Fecha_Firma date,
-	Fecha_Fin date,
-	Dias_Adicionados int,
+	Fecha_firma date not null,
+	Fecha_fin date not null,
+	Dias_adicionados int,
 	Valor int,
-	Valor_Pagado int,
-	Nit_Entidad_EntidadPublica int,
-	Num_Doc_Proveedor int,
-	Codigo_Producto int,
-	foreign key (Nit_Entidad_EntidadPublica) references EntidadPublica (Nit),
-	foreign key (Num_Doc_Proveedor) references Proveedor (Num_Doc),
+	Valor_pagado int,
+	Nit_Entidadpublica int,
+	Codigo_Producto int not null,
+	Codigo_estado_Estado int not null,
+	Num_doc_Proveedor int,
+	Codigo_area_Areacontrato int not null,
+	foreign key (Nit_Entidadpublica) references Entidadpublica (Nit),
 	foreign key (Codigo_Producto) references Producto (Codigo),
-	primary key (ID, Codigo_Producto)
+	foreign key (Codigo_estado_Estado) references Estado (Codigo_estado),
+	foreign key (Num_Doc_Proveedor) references Proveedor (Num_Doc),
+	foreign key (Codigo_area_Areacontrato) references Areacontrato (Codigo_area),
+	primary key (ID, Codigo_Producto, Codigo_estado_Estado, Codigo_area_Areacontrato)
 );
