@@ -3,9 +3,9 @@ import psycopg2
 password_x = ""
 user_x = ""
 
-Contrato = ["ID","Fecha_firma","Fecha_fin","Dias_adicionados","Valor","Valor_pagado","Nit_EntidadPublica","Codigo_Producto","Num_Doc_Proveedor"]
+Contrato = ["ID","Fecha_firma","Fecha_fin","Dias_adicionados","Valor","Valor_pagado","Nit_EntidadPublica","Codigo_Producto","Num_Doc_Proveedor","Codigo_estado_Estado" ,"Codigo_area_Areacontrato"]
 Entidadpublica = ["Nit","Nombre","Departamento"]
-Proveedor = ["Num_Doc","Nombre"]
+Proveedor = ["Num_Doc","Nombre","Cod_tipo_Tipoproveedor" ,"Tipo_doc_Tipodocumento"]
 Producto = ["Codigo","Nombre"]
 tables = [Contrato,Entidadpublica,Proveedor,Producto]
 table_names = ["Contrato","EntidadPublica","Proveedor","Producto"]
