@@ -44,9 +44,9 @@ if(selected_table == 0):
        9. *
     """)
     selected_column = input("Tu selección: ")
+    selected_column = input("Tu selección: ")
     if(selected_column != "*"):
         selected_column = int(selected_column)
-    if(selected_column != 9):
         final = tables[selected_table][selected_column]
 elif selected_table == 1:
     print("""SELECCIONA LA COLUMNA QUE QUIERES CONSULTAR O * PARA VER TODOS LOS DATOS:
@@ -58,8 +58,8 @@ elif selected_table == 1:
     selected_column = input("Tu selección: ")
     if(selected_column != "*"):
         selected_column = int(selected_column)
-    if(selected_column != 3):
         final = tables[selected_table][selected_column]
+
 elif selected_table == 2:
     print("""SELECCIONA LA COLUMNA QUE QUIERES CONSULTAR O * PARA VER TODOS LOS DATOS:
        0. NUMERO DE DOCUMENTO
@@ -67,9 +67,9 @@ elif selected_table == 2:
        2. *
     """)
     selected_column = input("Tu selección: ")
+    selected_column = input("Tu selección: ")
     if(selected_column != "*"):
         selected_column = int(selected_column)
-    if(selected_column != 2):
         final = tables[selected_table][selected_column]
 elif selected_table == 3:
     print("""SELECCIONA LA COLUMNA QUE QUIERES CONSULTAR O * PARA VER TODOS LOS DATOS:
@@ -78,15 +78,15 @@ elif selected_table == 3:
        2. *
     """)
     selected_column = input("Tu selección: ")
+    selected_column = input("Tu selección: ")
     if(selected_column != "*"):
         selected_column = int(selected_column)
-    if(selected_column != 2):
         final = tables[selected_table][selected_column]
+        
 
 sql1 = "SELECT * FROM " + table_name + ";"
 sql2 = "SELECT " + final + " FROM " + table_name
 
-print(sql2)
 
 try:
     conexion = psycopg2.connect(user= user_x, password= password_x, database="IcbfContracts", host="localhost", port="5432")
@@ -111,9 +111,3 @@ except psycopg2.Error as e:
 finally:
     cursor.close()
     conexion.close()
-
-
-
-
-
-
