@@ -7,7 +7,7 @@ create table Entidadpublica(
 
 create table Producto(
 	Codigo int not null,
-	Nombre varchar(30),
+	Nombre varchar(150),
 	primary key (Codigo)
 );
 
@@ -19,7 +19,7 @@ create table Estado(
 
 create table Areacontrato(
 	Codigo_area int not null,
-	Area varchar(15),
+	Area varchar(50),
 	primary key(Codigo_area)
 );
 
@@ -49,12 +49,12 @@ create table Contrato(
 	Fecha_firma date not null,
 	Fecha_fin date not null,
 	Dias_adicionados int,
-	Valor int,
+	Valor bigint,
 	Valor_pagado int,
 	Nit_Entidadpublica int,
 	Codigo_Producto int not null,
 	Codigo_estado_Estado int not null,
-	Num_doc_Proveedor int,
+	Num_doc_Proveedor bigint,
 	Codigo_area_Areacontrato int not null,
 	foreign key (Nit_Entidadpublica) references Entidadpublica (Nit),
 	foreign key (Codigo_Producto) references Producto (Codigo),
@@ -64,10 +64,12 @@ create table Contrato(
 	primary key (ID, Codigo_Producto, Codigo_estado_Estado, Codigo_area_Areacontrato)
 );
 
+COPY Entidadpublica FROM 'C:\ENTIDADES.csv' with delimiter ';' CSV HEADER;
+COPY Producto FROM 'C:\Productos.csv' with delimiter ';' CSV HEADER;
+COPY Estado FROM 'C:\EstadoContrato.csv' with delimiter ';' CSV HEADER;
+COPY Areacontrato FROM 'C:\AREAS.csv' with delimiter ';' CSV HEADER;
 COPY Tipodocumento FROM 'C:\TipoDocProveedor.csv' with delimiter ';' CSV HEADER;
 COPY Tipoproveedor FROM 'C:\TipoProveedor.csv' with delimiter ';' CSV HEADER;
 COPY Proveedor (Tipo_doc_Tipodocumento, Num_doc, Nombre, Cod_tipo_Tipoproveedor) FROM 'C:\Proveedor.csv' with delimiter ';' CSV HEADER;
-
-
-select *
-from proveedor
+COPY Contrato (ID, Nit_Entidadpublica, Codigo_estado_Estado, Codigo_area_Areacontrato, Fecha_firma, Fecha_fin, Dias_adicionados, Valor, Valor_pagado, Num_doc_Proveedor, Codigo_Producto)
+FROM 'C:\CONTRATOS_ICBF_GUAJIRA_CHOCO.csv' with delimiter ';' CSV HEADER;
