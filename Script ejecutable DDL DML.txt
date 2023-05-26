@@ -57,7 +57,7 @@ create table Contrato(
 	Num_doc_Proveedor bigint,
 	Codigo_area_Areacontrato int not null,
 	foreign key (Nit_Entidadpublica) references Entidadpublica (Nit),
-	foreign key (Codigo_Producto) references Producto (Codigo),
+	--foreign key (Codigo_Producto) references Producto (Codigo),
 	foreign key (Codigo_estado_Estado) references Estado (Codigo_estado),
 	foreign key (Num_Doc_Proveedor) references Proveedor (Num_doc),
 	foreign key (Codigo_area_Areacontrato) references Areacontrato (Codigo_area),
